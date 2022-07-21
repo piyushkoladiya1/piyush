@@ -1,0 +1,342 @@
+ I1  /*Get First_Name from employee table using alias name “Employee Name”.*/
+SELECT 
+    Employee_ref_id AS ref_id
+FROM
+    incentive;
+
+
+I2 /*Get First_Name from employee table using alias name “Employee Name”.*/
+SELECT 
+    first_name, joining_date
+FROM
+    employee
+
+
+I3 /*Get all employee details from the employee table order by First_Name 
+Ascending and Salary descending. */
+SELECT 
+    First_Name, salary
+FROM
+    employee
+ORDER BY first_name ASC , salary DESC;
+
+
+I4 /*Get employee details from employee table whose first name contains ‘o’ */
+SELECT 
+    *
+FROM
+    employee
+WHERE
+    First_name LIKE 'o%';
+
+I5 /*Get employee details from employee table whose joining month is 
+“January”.*/
+SELECT 
+    *
+FROM
+    employee
+WHERE
+    joining_date LIKE '2022-01';
+    
+
+I6 /*Get department, total salary with respect to a department from employee 
+table order by total salary descending.*/
+SELECT 
+    *
+FROM
+    employee
+WHERE
+    salary
+ORDER BY salary DESC;
+
+I7 /* Get department wise maximum salary from employee table order by salary 
+ascending.*/
+SELECT 
+    *
+FROM
+    employee
+WHERE
+    department LIKE 'Insurance'
+ORDER BY salary ASC;
+
+I8 /*Select first_name, incentive amount from employee and incentives table for 
+those employees who have incentives and incentive amount greater than 
+3000*/
+ select employee.employee_name , incentive.Incentive_amount
+ from incentive 
+ inner join employee
+ on
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ I9 /* Select 2nd Highest salary from employee table.*/
+ select *from employee where salary=(select Max(salary) from employee);
+
+I10 /* Select first_name, incentive amount from employee and incentives table for 
+all employees who got incentives using left join.*/
+select employee.first_name,incentive.Incentive_amount
+
+
+
+
+I11 /*Create View OF Employee table in which store first name ,last name and 
+salary only.*/
+select employee.first_name,employee.last_name,salary
+from employee
+
+I12 /*Create Procedure to find out department wise highest salary.*/
+
+
+
+
+
+
+
+I13  /*Create After Insert trigger on Employee table which insert records in view 
+table*/
+
+create  trigger view_
+after insert
+on employee for each row
+begin
+declare vuser varchar(50);
+select user() into vuser;
+insert into employee
+(Employee_id,First_Name,Last_Name,Salary,Joining_date,Department)
+values
+(now());
+end;
+
+ 
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+A1  /*All orders for more than $1000.*/
+SELECT 
+    *
+FROM
+    order_
+WHERE
+    amt > 1000;
+
+A2  /*Names and cities of all salespeople in London with commission above 0.10*/
+SELECT 
+    *
+FROM
+    salsperson
+WHERE
+    city = 'london' AND comm > 0.10;
+
+A3  /*All salespeople either in Barcelona or in London.*/
+SELECT 
+    *
+FROM
+    salsperson
+WHERE
+    city = 'london' OR city = 'barcelona'
+    
+A4  /*All salespeople with commission between 0.10 and 0.12. (Boundary values 
+shouldbe excluded).*/
+SELECT 
+    *
+FROM
+    salsperson
+WHERE
+    comm > 0.10 AND comm < 0.12
+    
+A5  /*All customers excluding those with rating <= 100 unless they are located in 
+Rome.*/
+SELECT 
+    *
+FROM
+    customer
+WHERE
+    rating <= 100 AND city = 'roe'
+
+A6  /*All orders except those with 0 or NULL value in amt field.*/
+SELECT 
+    *
+FROM
+    order_
+WHERE
+    amt = 'o' OR amt = 'null'
+
+A7  /*Count the number of salespeople currently listing orders in the order table.*/
+SELECT 
+    COUNT(*) AS total
+FROM
+    salsperson
+
+A8  /*Largest order taken by each salesperson, datewise*/
+
+SELECT 
+    MAX(amt), ode, sno
+FROM
+    order_
+ORDER BY ode ASC
+
+A9  /*Largest order taken by each salesperson with order value more than $3000. 
+(ie same city).*/
+
+SELECT 
+    amt, ode, sno
+FROM
+    order_
+WHERE
+    amt > 3000
+ORDER BY ode ASC
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+B1. /*Return the FirstName, LastName, ProductName, and SalePrice for all 
+products sold in the month of October200*/
+select customer.first_name,customer.last_name,product.product_name,sales.sales_price 
+from sales
+inner join customer
+on sales.customer_id = customer.customer_id
+inner join product
+on sales.product_id = product.product_id
+where sales_date = 2022-3-30 
+B2.  /*Return the CustomerID, FirstName, and LastName of those individuals in 
+the Customer table who have made no Sales purchases*/
+
+
+
+
+
+
+B3.  /*Return the FirstName, LastName, SalePrice, Recommended SalePrice, and 
+the difference between the SalePrice and Recommended SalePrice for all 
+Sales. The difference must be returned as a positive number.*/
+select customer.first_name,customer.last_name,sales.sales_price,product.recommended_price,sales.sales_price-product.recommended_price as diffent
+from customer
+inner join sales
+on customer.customer_id = sales.customer_id
+join product 
+on  sales.product_id = product.product_id 
+
+
+B4.   /*.Add the following Customer and Sale information to the database. (using 
+store procedure*/
+DELIMITER //
+create procedure insert_dataB4()
+begin 
+insert into customer (first_name,last_name,city,state,Zip) values ('priynka','chopra','mumbai','MH',395008);
+insert into sales (sales_price,sales_date) values ('205',now());
+end
+
+call insert_dataB4();
+
+
+B5.   /*Return the Product Category and the average Sale Price for those customers 
+who have purchased two or more products.*/
+SELECT 
+    product.category, AVG(sales.sales_price) AS avg_price
+FROM
+    product
+        LEFT JOIN
+    sales ON product.product_id = sales.product_id
+GROUP BY (category)
+
+
+B6.  /*Update the Sale Price to the Recommended Sale Price of those Sales 
+occurring between 6/10/2005and6/20/2005.*/
+UPDATE sales 
+SET 
+    sales_price = 200;
+where sales_date 2022-03-30 or 2022-03-31
+
+B7.   /*Number of Sales by Product Category where the average Recommended 
+Priceis10 or more dollars greater than the average Sale Price.*/
+
+B8.  /*Largest order taken by each salesperson, datewise.*/  
+SELECT sales.sales_id, sales.sales_date,product.product_id
+from sales
+inner join product
+on sales.product_id = product.product_id
+group by (sales_id)
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+1)/* Write an SQL query that returns the project number and name for projects with a 
+budget greater than $100,000.*/
+SELECT pno, pname 
+FROM proj 
+WHERE budget > 100000 
+
+
+2)/* Write an SQL query that returns all works on records where hours worked is less than 
+10 and the responsibility is 'Manager'.*/
+SELECT * 
+FROM workson 
+WHERE hours < 10 AND resp = 'Manager' 
+
+
+3)/* Write an SQL query that returns the employees (number and name only) who have a 
+title of 'EE' or 'SA' and make more than $35,000.*/
+SELECT eno, ename 
+FROM emp 
+WHERE (title = 'EE' OR title = 'SA') AND salary > 35000 
+
+
+4) /*Write an SQL query that returns the employees (name only) in department 'D1' 
+ordered by decreasing salary.*/
+SELECT ename 
+FROM emp 
+WHERE dno = 'D1' 
+ORDER BY salary DESC 
+
+
+5)/* Write an SQL query that returns the departments (all fields) ordered by ascending 
+department name.*/
+SELECT * 
+FROM dept 
+ORDER BY dname ASC 
+
+
+6)/* Write an SQL query that returns the employee name, department name, and employee 
+title.*/
+SELECT ename, dname, title 
+FROM emp, dept 
+WHERE emp.dno = dept.dno 
+
+
+7) /*Write an SQL query that returns the project name, hours worked, and project number 
+for all works on records where hours > 10.*/
+SELECT pname, hours, proj.pno 
+FROM workson, proj 
+WHERE hours > 10 AND proj.pno = workson.pno 
+
+
+8)/* Write an SQL query that returns the project name, department name, and budget for 
+all projects with a budget < $50,000.*/
+SELECT pname, dname, budget 
+FROM proj, dept 
+WHERE budget < 50000 AND proj.dno = dept.dno 
+
+
+9) /*Write an SQL query that returns the employee numbers and salaries of all employees 
+in the 'Consulting' department ordered by descending salary.*/
+SELECT eno, salary 
+FROM emp, dept 
+WHERE dname = 'Consulting' 
+ORDER BY salary DESC 
+
+
+10) /*Write an SQL query that returns the employee name, project name, employee title, 
+and hours for all works on records.*/
+ SELECT ename, pname, title, hours
+FROM emp, proj, workson 
+WHERE emp.eno = workson.eno and proj.pno = workson.pno
+
+
