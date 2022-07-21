@@ -1,0 +1,385 @@
+﻿@{ 
+    string username = Session["username"] != null ? Session["username"].ToString() : "";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Sanatorium a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <!-- default-css-files -->
+    <link href="~/Areas/user/web/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" href="~/Areas/user/web/css/flexslider.css" type="text/css" media="screen" />
+    <link href="~/Areas/user/web/css/font-awesome.css" rel="stylesheet" type="text/css" media="all">
+    <!-- default-css-files -->
+    <!-- Online fonts -->
+    <link href="~/Areas/user/web//fonts.googleapis.com/css?family=Oxygen:300,400,700" rel="stylesheet">
+    <!-- //Online fonts -->
+    <!-- style.css-file -->
+    <link href="~/Areas/user/web/css/style.css" rel='stylesheet' type='text/css' />
+    <!-- //style.css-file -->
+</head>
+<body>
+    <!--header-section-starts-here-->
+    <header>
+        <div class="top-header" id="home">
+            <div class="container">
+                <div class="col-md-8 col-sm-8 col-xs-8 top-left">
+                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> 11/665 Postal street, Park avenue,USA</p>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4 top-right">
+
+                    @if (username == "")
+                    {
+                        <a href="/user/Default/login" ><span></span> Sign In</a>
+                        <a href="/user/Default/register" ><span></span> New Register</a>
+                    }
+                    else
+                    {
+                        <a href="/user/Default/logout"><span></span> logout</a>
+                    }
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </header>
+    <!--//header-section-end-here-->
+    <!-- popup for sign in form -->
+    <div class="modal video-modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModal1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div id="small-dialog1" class="mfp-hide book-form">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Sign In </h3>
+                    <form action="#" method="post">
+                        <input type="email" name="Email" class="email" placeholder="Email" required="" />
+                        <input type="password" name="Password" class="password" placeholder="Password" required="" />
+                        <ul>
+                            <li>
+                                <input type="checkbox" id="brand1" value="">
+                                <label for="brand1"><span></span>Remember me</label>
+                            </li>
+                        </ul>
+                        <a href="#">Forgot Password?</a><br>
+                        <div class="clearfix"></div>
+                        <input type="submit" value="Sign In">
+                    </form>
+                    <div class="w3ls-or">
+                        <p>Or</p>
+                    </div>
+                    <div class="top-middle w3ls-sma">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //popup for sign in form -->
+    <!-- popup for sign up form -->
+    <div class="modal video-modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModal2">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div id="small-dialog2" class="mfp-hide book-form">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3>Sign Up</h3>
+                    <form action="#" method="post">
+                        <input type="text" name="Name" placeholder="Your Name" required="" />
+                        <input type="email" name="Email" class="email" placeholder="Email" required="" />
+                        <input type="password" name="Password" id="password1" class="password" placeholder="Password" required="" />
+                        <input type="password" name="Password" id="password2" class="password" placeholder="Confirm Password" required="" />
+                        <input type="submit" value="Sign Up">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- //popup for sign up form -->
+    <!--banner-section-starts-here-->
+    <section class="banner jarallax">
+        <div class="navigation">
+            <div class="container">
+                <nav class="navbar navbar-default">
+                    <div class="navbar-header navbar-left">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <div class="logo">
+                        <h1><a class="navber-brand" href="index.html"><i class="fa fa-heartbeat" aria-hidden="true"></i> Sanatorium</a></h1>
+                    </div>
+                    <div class="collapse navbar-collapse navbar-right navigation-right" id="bs-example-navbar-collapse-1">
+                        <nav class="link-effect-3 w3ls-navma" id="link-effect-3">
+                            <ul class="nav1 navbar-nav nav nav-wil">
+                                <li class="active"><a data-hover="Home" href="index.html">Home</a></li>
+                                <li><a data-hover="appointment" href="#appointment" class="scroll">appointment</a></li>
+                                <li><a data-hover="Services" href="#services" class="scroll">Services</a></li>
+                                <li><a data-hover="Staff" href="#staff" class="scroll">Staff</a></li>
+                                <li><a data-hover="lab" href="#grid-gallery" class="scroll">lab</a></li>
+                                <li><a data-hover="Contact" href="#contact" class="scroll">Contact</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+                </nav>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="w3ls_banner_info">
+            <div class="container">
+                <div class="w3l-banner-grids">
+                    <div class="slider">
+                        <div class="callbacks_container">
+                            <ul class="rslides" id="slider4">
+                                <li>
+                                    <div class="w3ls-text">
+                                        <h3>welcome to sanatorium</h3>
+                                        <h3> the right potential</h3>
+                                        <p>Cras ultrices lorem a hendrerit condim</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3ls-text">
+                                        <h3>Good hospitality</h3>
+                                        <h3>super services</h3>
+                                        <p>Proin convallis leo vitae ligula portti</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3ls-text">
+                                        <h3>healthy environment</h3>
+                                        <h3>with clean & Green</h3>
+                                        <p>Cras ultrices lorem a hendrerit condim</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="w3ls-text">
+                                        <h3>best treatment and </h3>
+                                        <h3> good care</h3>
+                                        <p>Cras ultrices lorem a hendrerit condim</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--about-section-starts-here-->
+   @RenderBody()
+    <!--footer-section-end-here-->
+    <section class="footer-top jarallax">
+        <div class="container">
+            <div class="footer-grids">
+                <div class="w3ls-top-ft text-center">
+                    <span>get to know</span>
+                    <h3>hospitality</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse iaculis quam non lacus accumsan aliquet</p>
+                    <div class="srv-w3ls">
+                        <a href="#" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Read More</a>
+                    </div>
+                </div>
+                <div class="w3ls-bt-ft">
+                    <div class="navigation-w3ls">
+                        <nav class="navbar-btm">
+                            <div class="logo">
+                                <h3><a class="navber-brand" href="index.html"><i class="fa fa-heartbeat" aria-hidden="true"></i>sanatorium</a></h3>
+                            </div>
+                            <div class="footer-nav">
+                                <ul class="nav1 w3ls-ma">
+                                    <li class="active"><a data-hover="Home" class="scroll" href="#home">Home</a></li>
+                                    <li><a data-hover="appointment" href="#appointment" class="scroll">Appointment</a></li>
+                                    <li><a data-hover="OurStaff" href="#staff" class="scroll">OurStaff</a></li>
+                                    <li><a data-hover="ourlab" href="#grid-gallery" class="scroll">Our lab</a></li>
+                                    <li><a data-hover="Contact" href="#contact" class="scroll">Contact</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="col-md-6 col-sm-6 col-xs-6 copy-right-grids">
+                        <div class="copy-left">
+                            <p class="footer-gd">© 2017 Sanatorium. All Rights Reserved | Design by <a href="https://w3layouts.com/" target="_blank">W3layouts</a></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6 top-middle">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">sanatorium</h4>
+                </div>
+                <div class="modal-body agileits">
+                    <div class="modal-img">
+                        <img src="~/Areas/user/web/images/md.jpg" alt="image">
+                    </div>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer scelerisque orci consectetur sapien feugiat fermentum.
+                        Phasellus convallis efficitur arcu, nec convallis odio egestas sit amet. Praesent erat sem, finibus vel ornare efficitur,
+                        mattis sed risus. Duis ornare sodales dui finibus molestie.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--//Modal -->
+    <!--//footer-section-end-here-->
+    <!-- Default-JavaScript-File -->
+    <script type="text/javascript" src="~/Areas/user/web/js/jquery-2.1.4.min.js"></script>
+    <!-- password-script -->
+    <script type="text/javascript">
+		window.onload = function () {
+			document.getElementById("password1").onchange = validatePassword;
+			document.getElementById("password2").onchange = validatePassword;
+		}
+
+		function validatePassword() {
+			var pass2 = document.getElementById("password2").value;
+			var pass1 = document.getElementById("password1").value;
+			if (pass1 != pass2)
+				document.getElementById("password2").setCustomValidity("Passwords Don't Match");
+			else
+				document.getElementById("password2").setCustomValidity('');
+			//empty string means no validation error
+		}
+    </script>
+    <!-- //password-script -->
+
+
+    <script src="~/Areas/user/web/js/responsiveslides.min.js"></script>
+    <script>
+		// You can also use "$(window).load(function() {"
+		$(function () {
+			// Slideshow 4
+			$("#slider4").responsiveSlides({
+				auto: true,
+				pager: true,
+				nav: false,
+				speed: 500,
+				namespace: "callbacks",
+				before: function () {
+					$('.events').append("<li>before event fired.</li>");
+				},
+				after: function () {
+					$('.events').append("<li>after event fired.</li>");
+				}
+			});
+
+		});
+    </script>
+    <!--banner Slider starts Here-->
+    <script type="text/javascript" src="~/Areas/user/web/js/modernizr.custom.79639.js"></script>
+    <!-- //Default-JavaScript-File -->
+    <!-- gallery-pop-up -->
+    <script src="~/Areas/user/web/js/jquery.chocolat.js"></script>
+    <link rel="stylesheet" href="~/Areas/user/web/css/chocolat.css" type="text/css" media="screen">
+    <!--light-box-files -->
+    <script type="text/javascript">
+		$(function () {
+			$('.agileinfo_portfolio_grid a').Chocolat();
+		});
+    </script>
+    <!-- //gallery-pop-up -->
+    <!-- FlexSlider -->
+    <script defer src="~/Areas/user/web/js/jquery.flexslider.js"></script>
+    <script type="text/javascript">
+		$(function () {});
+		$(window).load(function () {
+			$('.flexslider').flexslider({
+				animation: "slide",
+				start: function (slider) {
+					$('body').removeClass('loading');
+				}
+			});
+		});
+    </script>
+    <!-- FlexSlider -->
+    <!-- start-smoth-scrolling-nav -->
+    <script type="text/javascript" src="~/Areas/user/web/js/move-top.js"></script>
+    <script type="text/javascript" src="~/Areas/user/web/js/easing.js"></script>
+    <script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 1000);
+			});
+		});
+    </script>
+    <!-- start-smoth-scrolling -->
+    <!-- Slide-To-Top JavaScript (No-Need-To-Change) -->
+    <script type="text/javascript">
+		$(document).ready(function () {
+			var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 100,
+				easingType: 'linear'
+			};
+		});
+    </script>
+    <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 0;"> </span></a>
+    <!-- //Slide-To-Top JavaScript -->
+    <!-- jarallax scrolling -->
+    <script src="~/Areas/user/web/js/jarallax.js"></script>
+    <script src="~/Areas/user/web/js/SmoothScroll.min.js"></script>
+    <script type="text/javascript">
+		/* init Jarallax */
+		$('.jarallax').jarallax({
+			speed: 0.5,
+			imgWidth: 1366,
+			imgHeight: 768
+		})
+    </script>
+    <!-- //jarallax scrolling -->
+    <!-- smooth scrolling -->
+    <script type="text/javascript">
+		$(document).ready(function () {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear'
+				};
+			*/
+			$().UItoTop({
+				easingType: 'easeOutQuart'
+			});
+		});
+    </script>
+    <!-- //smooth scrolling -->
+    <script type="text/javascript" src="~/Areas/user/web/js/bootstrap-3.1.1.min.js"></script>
+</body>
+</html>

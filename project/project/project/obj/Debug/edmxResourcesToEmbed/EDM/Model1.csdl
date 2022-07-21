@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="admin">
+    <Key>
+      <PropertyRef Name="admin_id" />
+    </Key>
+    <Property Name="admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="l_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="appoitment">
+    <Key>
+      <PropertyRef Name="appoitment_id" />
+    </Key>
+    <Property Name="appoitment_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="appoitment_date_time" Type="DateTime" Precision="3" />
+    <Property Name="appoitment_status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="hospital_id" Type="Int32" />
+    <Property Name="doctor_id" Type="Int32" />
+    <Property Name="patient_id" Type="Int32" />
+    <NavigationProperty Name="doctor" Relationship="Self.FK_appoitment_doctor" FromRole="appoitment" ToRole="doctor" />
+    <NavigationProperty Name="hospital" Relationship="Self.FK_appoitment_hospital" FromRole="appoitment" ToRole="hospital" />
+    <NavigationProperty Name="patient" Relationship="Self.FK_appoitment_patient" FromRole="appoitment" ToRole="patient" />
+  </EntityType>
+  <EntityType Name="city">
+    <Key>
+      <PropertyRef Name="city_id" />
+    </Key>
+    <Property Name="city_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="city_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="state_id" Type="Int32" />
+    <NavigationProperty Name="state" Relationship="Self.FK_city_state" FromRole="city" ToRole="state" />
+    <NavigationProperty Name="hospitals" Relationship="Self.FK_hospital_city" FromRole="city" ToRole="hospital" />
+    <NavigationProperty Name="patients" Relationship="Self.FK_patient_city" FromRole="city" ToRole="patient" />
+  </EntityType>
+  <EntityType Name="doctor">
+    <Key>
+      <PropertyRef Name="doctor_id" />
+    </Key>
+    <Property Name="doctor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="l_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="contact_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="degree" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="speciality" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="hospital_id" Type="Int32" />
+    <NavigationProperty Name="appoitments" Relationship="Self.FK_appoitment_doctor" FromRole="doctor" ToRole="appoitment" />
+    <NavigationProperty Name="hospital" Relationship="Self.FK_doctor_hospital" FromRole="doctor" ToRole="hospital" />
+  </EntityType>
+  <EntityType Name="hospital">
+    <Key>
+      <PropertyRef Name="hospital_id" />
+    </Key>
+    <Property Name="hospital_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="hospital_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="hospital_contact_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="state_id" Type="Int32" />
+    <Property Name="city_id" Type="Int32" />
+    <NavigationProperty Name="appoitments" Relationship="Self.FK_appoitment_hospital" FromRole="hospital" ToRole="appoitment" />
+    <NavigationProperty Name="city" Relationship="Self.FK_hospital_city" FromRole="hospital" ToRole="city" />
+    <NavigationProperty Name="doctors" Relationship="Self.FK_doctor_hospital" FromRole="hospital" ToRole="doctor" />
+    <NavigationProperty Name="state" Relationship="Self.FK_hospital_state" FromRole="hospital" ToRole="state" />
+  </EntityType>
+  <EntityType Name="patient">
+    <Key>
+      <PropertyRef Name="patient_id" />
+    </Key>
+    <Property Name="patient_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="f_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="l_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="contact_no" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="state_id" Type="Int32" />
+    <Property Name="city_id" Type="Int32" />
+    <NavigationProperty Name="appoitments" Relationship="Self.FK_appoitment_patient" FromRole="patient" ToRole="appoitment" />
+    <NavigationProperty Name="city" Relationship="Self.FK_patient_city" FromRole="patient" ToRole="city" />
+    <NavigationProperty Name="state" Relationship="Self.FK_patient_state" FromRole="patient" ToRole="state" />
+  </EntityType>
+  <EntityType Name="state">
+    <Key>
+      <PropertyRef Name="state_id" />
+    </Key>
+    <Property Name="state_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="state_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="cities" Relationship="Self.FK_city_state" FromRole="state" ToRole="city" />
+    <NavigationProperty Name="hospitals" Relationship="Self.FK_hospital_state" FromRole="state" ToRole="hospital" />
+    <NavigationProperty Name="patients" Relationship="Self.FK_patient_state" FromRole="state" ToRole="patient" />
+  </EntityType>
+  <Association Name="FK_appoitment_doctor">
+    <End Role="doctor" Type="Self.doctor" Multiplicity="0..1" />
+    <End Role="appoitment" Type="Self.appoitment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="doctor">
+        <PropertyRef Name="doctor_id" />
+      </Principal>
+      <Dependent Role="appoitment">
+        <PropertyRef Name="doctor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_appoitment_hospital">
+    <End Role="hospital" Type="Self.hospital" Multiplicity="0..1" />
+    <End Role="appoitment" Type="Self.appoitment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hospital">
+        <PropertyRef Name="hospital_id" />
+      </Principal>
+      <Dependent Role="appoitment">
+        <PropertyRef Name="hospital_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_appoitment_patient">
+    <End Role="patient" Type="Self.patient" Multiplicity="0..1" />
+    <End Role="appoitment" Type="Self.appoitment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="patient">
+        <PropertyRef Name="patient_id" />
+      </Principal>
+      <Dependent Role="appoitment">
+        <PropertyRef Name="patient_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_city_state">
+    <End Role="state" Type="Self.state" Multiplicity="0..1" />
+    <End Role="city" Type="Self.city" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="state">
+        <PropertyRef Name="state_id" />
+      </Principal>
+      <Dependent Role="city">
+        <PropertyRef Name="state_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hospital_city">
+    <End Role="city" Type="Self.city" Multiplicity="0..1" />
+    <End Role="hospital" Type="Self.hospital" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="city">
+        <PropertyRef Name="city_id" />
+      </Principal>
+      <Dependent Role="hospital">
+        <PropertyRef Name="city_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_patient_city">
+    <End Role="city" Type="Self.city" Multiplicity="0..1" />
+    <End Role="patient" Type="Self.patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="city">
+        <PropertyRef Name="city_id" />
+      </Principal>
+      <Dependent Role="patient">
+        <PropertyRef Name="city_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_doctor_hospital">
+    <End Role="hospital" Type="Self.hospital" Multiplicity="0..1" />
+    <End Role="doctor" Type="Self.doctor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hospital">
+        <PropertyRef Name="hospital_id" />
+      </Principal>
+      <Dependent Role="doctor">
+        <PropertyRef Name="hospital_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_hospital_state">
+    <End Role="state" Type="Self.state" Multiplicity="0..1" />
+    <End Role="hospital" Type="Self.hospital" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="state">
+        <PropertyRef Name="state_id" />
+      </Principal>
+      <Dependent Role="hospital">
+        <PropertyRef Name="state_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_patient_state">
+    <End Role="state" Type="Self.state" Multiplicity="0..1" />
+    <End Role="patient" Type="Self.patient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="state">
+        <PropertyRef Name="state_id" />
+      </Principal>
+      <Dependent Role="patient">
+        <PropertyRef Name="state_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="doctor_finderEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="admins" EntityType="Self.admin" />
+    <EntitySet Name="appoitments" EntityType="Self.appoitment" />
+    <EntitySet Name="cities" EntityType="Self.city" />
+    <EntitySet Name="doctors" EntityType="Self.doctor" />
+    <EntitySet Name="hospitals" EntityType="Self.hospital" />
+    <EntitySet Name="patients" EntityType="Self.patient" />
+    <EntitySet Name="states" EntityType="Self.state" />
+    <AssociationSet Name="FK_appoitment_doctor" Association="Self.FK_appoitment_doctor">
+      <End Role="doctor" EntitySet="doctors" />
+      <End Role="appoitment" EntitySet="appoitments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_appoitment_hospital" Association="Self.FK_appoitment_hospital">
+      <End Role="hospital" EntitySet="hospitals" />
+      <End Role="appoitment" EntitySet="appoitments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_appoitment_patient" Association="Self.FK_appoitment_patient">
+      <End Role="patient" EntitySet="patients" />
+      <End Role="appoitment" EntitySet="appoitments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_city_state" Association="Self.FK_city_state">
+      <End Role="state" EntitySet="states" />
+      <End Role="city" EntitySet="cities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hospital_city" Association="Self.FK_hospital_city">
+      <End Role="city" EntitySet="cities" />
+      <End Role="hospital" EntitySet="hospitals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_patient_city" Association="Self.FK_patient_city">
+      <End Role="city" EntitySet="cities" />
+      <End Role="patient" EntitySet="patients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_doctor_hospital" Association="Self.FK_doctor_hospital">
+      <End Role="hospital" EntitySet="hospitals" />
+      <End Role="doctor" EntitySet="doctors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_hospital_state" Association="Self.FK_hospital_state">
+      <End Role="state" EntitySet="states" />
+      <End Role="hospital" EntitySet="hospitals" />
+    </AssociationSet>
+    <AssociationSet Name="FK_patient_state" Association="Self.FK_patient_state">
+      <End Role="state" EntitySet="states" />
+      <End Role="patient" EntitySet="patients" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

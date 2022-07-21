@@ -1,0 +1,119 @@
+﻿@model doctor_fonder.EDM.appoitment
+
+@{
+    ViewBag.Title = "addapoitment";
+    Layout = "~/Areas/user/Views/Shared/_LayoutPage1.cshtml";
+}
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#hospital_id").change(function () {
+            $.ajax({
+                url: "/user/Default/getdoctorbyhospitalid",
+                dataType:"json",
+                type: "GET",
+                data: { id: $("#hospital_id").val() },
+                success: function (data) {
+                    $("#doctor_id").empty();
+                    $("#doctor_id").append("<option>------select doctor----</option>");
+                    $.each(data, function (key,item) {
+                        $("#doctor_id").append("<option value= '" + item.doctor_id + "'>" +
+                            "<td>" + item.f_name + "</td>" +
+                            "<td>" + item.l_name + "</td>" +
+                            "</option > "
+                        );
+                    });
+                }
+            });
+        });
+
+    });
+
+
+</script>
+<div class="appointment py-5">
+    <div class="py-xl-5 py-lg-3">
+        <div class="w3ls-titles text-center mb-5">
+            <h3 class="title">Appointment</h3>
+            <span>
+                <i class="fas fa-user-md"></i>
+            </span>
+            <p class="mt-2">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        </div>
+        <div class="d-flex">
+
+            <div class="contact-right-w3l appoint-form">
+                <h5 class="title-w3 text-center mb-5">Fill your appointment form</h5>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        <h4>appoitment</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.appoitment_date_time, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.appoitment_date_time, new { @class = "form-control", @type = "datetime-local" })
+                                @Html.ValidationMessageFor(model => model.appoitment_date_time, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.appoitment_status, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.appoitment_status, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.appoitment_status, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.hospital_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownListFor(model => model.hospital_id, ViewBag.hospital as List<SelectListItem>, "-----select hospital-----", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.hospital_id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.doctor_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <select id="doctor_id" name="doctor_id" class="form-control" required>
+                                    <option>-----select doctor-----</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.doctor_id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.patient_id, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                <input type="text" value="@Session["username"].ToString()" id="patient_id" name="patient_id" class="form-control" />
+                                @Html.ValidationMessageFor(model => model.patient_id, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default" />
+                            </div>
+                        </div>
+                    </div>
+                }
+
+                <div>
+                    @Html.ActionLink("Back to List", "manageappoitment")
+                </div>
+            </div>
+            <div class="clerafix"></div>
+        </div>
+    </div>
+</div>
+
+
